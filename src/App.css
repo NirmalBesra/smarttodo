@@ -113,9 +113,11 @@ button:hover
 
 .cardBody{
     display: flex;
-    width: 400px;
+        width: 100%;
     /* border: 1px solid rgb(0, 0, 0); */
     gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .card
@@ -159,4 +161,10 @@ button:hover
 .priority
 {
   font-size: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 60px;
+    justify-content: center;
+    align-items: baseline;
 }

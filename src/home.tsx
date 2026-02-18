@@ -1,6 +1,8 @@
 
 
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash  } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 const  Home = () => {
 const [cards,setCards] = useState([]);
@@ -16,7 +18,7 @@ useEffect(()=>{
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
                                     <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span></div>
-                                    <div className='priority'><span>{card.priority}</span></div>
+                                    <div className='priority'><span>{card.priority}</span> <span><FontAwesomeIcon icon={faTrash } /></span></div>
                               </div>))
                         }
 

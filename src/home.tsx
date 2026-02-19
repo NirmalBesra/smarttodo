@@ -1,8 +1,9 @@
 
 
 import { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash  } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdd, faTrash  } from '@fortawesome/free-solid-svg-icons';
+
 import './App.css';
 const  Home = () => {
 type Card = {
@@ -39,17 +40,21 @@ const deleteCard = async (id:string) =>{
             console.log(error);
       }
 };
+
+
+const navigateToNew = () =>{};
        return <div className='homeBody'>
                     <h3>Smart Todo</h3>
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
                                     <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span></div>
-                                    <div className='priority'><span>{card.priority}</span> <span onClick={deleteCard}><FontAwesomeIcon icon={faTrash } /></span></div>
+                                    <div className='priority'><span>{card.priority}</span> <span onClick={()=>deleteCard(card.id)}><FontAwesomeIcon icon={faTrash } /></span></div>
                               </div>))
                         }
 
                     </div>
+                    <div className='floatAdd'><span onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span></div>
               </div>;
 }
 export default Home;

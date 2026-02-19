@@ -168,3 +168,13 @@ button:hover
     justify-content: center;
     align-items: baseline;
 }
+.floatAdd {
+  position: fixed;
+    top: 95%;
+    left: 95%;
+    border-radius: 20px;
+    background-color:#818181;
+}
+.floatAdd > span {
+  padding: 20px;
+}

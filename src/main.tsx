@@ -4,9 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css'
 import FormUI from './formUI';
 import Home from './home';
+import App from './App';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter><Home  /></BrowserRouter>
+    <BrowserRouter><App  /></BrowserRouter>
     
   </StrictMode>,
 )

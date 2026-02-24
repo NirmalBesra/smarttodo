@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faTrash  } from '@fortawesome/free-solid-svg-icons';
+import { Route, useNavigate } from "react-router-dom";
 
 import './App.css';
+
 const  Home = () => {
 type Card = {
   id: number,
@@ -13,14 +15,14 @@ type Card = {
   desc: string
 };
 const [cards,setCards] = useState<Card[]>([]);
-
+const navigate = useNavigate();
 useEffect(()=>{
       fetch("http://localhost:8181/getlist")
       .then((res)=>res.json())
       .then((data)=> setCards(data));
 },[]);
 
-const deleteCard = async (id:string) =>{
+const deleteCard = async (id:any) =>{
       console.log("delete called");
       try {
             await fetch('http://localhost:8181/deletetodo', {
@@ -42,7 +44,10 @@ const deleteCard = async (id:string) =>{
 };
 
 
-const navigateToNew = () =>{};
+const navigateToNew = () =>{
+ navigate("/Add")
+
+};
        return <div className='homeBody'>
                     <h3>Smart Todo</h3>
                     <div className='cardBody'>
@@ -55,6 +60,8 @@ const navigateToNew = () =>{};
 
                     </div>
                     <div className='floatAdd'><span onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span></div>
+              
               </div>;
+              
 }
 export default Home;

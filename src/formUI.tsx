@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import './App.css'
+import { useNavigate } from 'react-router-dom';
 
 function FormUI() {
  // const [count, setCount] = useState(0)
@@ -15,7 +16,7 @@ function FormUI() {
   console.log("button was pressed");
   Submit();
  }
-
+const navigate = useNavigate();
  const Submit = async ()=>{
  // const [error, setError] = useState<string | null>(null);
   const data = {taskname:taskName,priority:priority};
@@ -41,6 +42,10 @@ function FormUI() {
     }
 
  };
+
+ const handleCancel = ()=>{
+  navigate("/");
+ }
 
 
  useEffect(()=>{
@@ -75,7 +80,7 @@ function FormUI() {
                 </div>
               </div>
             </button>
-            <button className="button" onClick={handleSubmit}> 
+            <button className="button" onClick={handleCancel}> 
               <div className="button-outer">
                 <div className="button-inner">
                   <span>Cancel</span>

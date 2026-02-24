@@ -178,3 +178,8 @@ button:hover
 .floatAdd > span {
   padding: 20px;
 }
+.errorClass{
+  
+    color: red;
+    font-size: xx-small;
+}

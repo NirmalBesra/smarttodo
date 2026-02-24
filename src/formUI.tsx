@@ -8,13 +8,25 @@ function FormUI() {
 //form states
  const [taskName, setTaskName] = useState("");
  const [priority, setPriority] = useState("");
+ const [error, setError] = useState("");
 
 
-
- const handleSubmit  = (e:React.MouseEvent<HTMLButtonElement>)=> {
-  e.preventDefault();
+ const handleSubmit  = (e?:React.MouseEvent<HTMLButtonElement>)=> {
+  e?.preventDefault();
   console.log("button was pressed");
-  Submit();
+  if(taskName.trim()===''){
+    setError("Task name is required for submittion");
+
+  }
+  else if(priority.trim()===''){
+    setError("priority is required for submittion");
+
+  } else {
+    Submit();
+  }
+
+  
+
  }
 const navigate = useNavigate();
  const Submit = async ()=>{
@@ -53,7 +65,7 @@ const navigate = useNavigate();
     if(e.key==='Enter') 
       {
       console.log("enter was pressed");
-      Submit();
+      handleSubmit();
     }
   }
   window.addEventListener("keydown", handleKeyPress);
@@ -87,8 +99,9 @@ const navigate = useNavigate();
                 </div>
               </div>
             </button>
+            
           </div>
-          
+          {error && <p className="errorClass">{error}</p>}
     </form>
   )
 }

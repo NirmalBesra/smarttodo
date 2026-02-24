@@ -12,9 +12,12 @@ type Card = {
   id: number,
   taskname:string,
   priority: string,
-  desc: string
+  desc: string,
+  isCompleted: boolean
 };
 const [cards,setCards] = useState<Card[]>([]);
+const [isOpen, setIsOpen] = useState(false);
+
 const navigate = useNavigate();
 useEffect(()=>{
       refreshCards();
@@ -23,7 +26,10 @@ useEffect(()=>{
 const refreshCards = ()=>{
       fetch("http://localhost:8181/getlist")
       .then((res)=>res.json())
-      .then((data)=> setCards(data));
+      .then((data)=> setCards(data.map((cards: Card)=>{
+            ...cards,
+            isOpen: cards.isCompleted ?? false
+      }))),
 
       console.log("cards were refreshed");
 }
@@ -48,7 +54,9 @@ const deleteCard = async (id:any) =>{
             console.log(error);
       }
 };
-
+const handleToggle = () => {
+      setIsOpen(prev =>!prev);
+}
 
 const navigateToNew = () =>{
  navigate("/Add")
@@ -59,7 +67,7 @@ const navigateToNew = () =>{
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
-                                    <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span></div>
+                                    <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span> <div className={`toggle ${isOpen ? "active" : ""}`} onClick={handleToggle}> <div className="circle"></div></div></div>
                                     <div className='priority'><span>{card.priority}</span> <span onClick={()=>deleteCard(card.id)}><FontAwesomeIcon icon={faTrash } /></span></div>
                               </div>))
                         }

@@ -19,7 +19,7 @@ function FormUI() {
 
   }
   else if(priority.trim()===''){
-    setError("priority is required for submittion");
+    setError("Priority is required for submittion");
 
   } else {
     Submit();

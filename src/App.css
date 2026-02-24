@@ -107,6 +107,13 @@ button:hover
     border-radius: 20px;
     width: 500px;
 }
+.cardHeader {
+  display: flex;
+}
+.cardHeader > span {
+  font-size: x-large;
+  padding: 15px;
+}
 .cardBody > p {
   font-size: xx-small;
 }

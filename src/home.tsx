@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faTrash  } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faRefresh, faTrash  } from '@fortawesome/free-solid-svg-icons';
 import { Route, useNavigate } from "react-router-dom";
 
 import './App.css';
@@ -17,10 +17,16 @@ type Card = {
 const [cards,setCards] = useState<Card[]>([]);
 const navigate = useNavigate();
 useEffect(()=>{
+      refreshCards();
+},[]);
+
+const refreshCards = ()=>{
       fetch("http://localhost:8181/getlist")
       .then((res)=>res.json())
       .then((data)=> setCards(data));
-},[]);
+
+      console.log("cards were refreshed");
+}
 
 const deleteCard = async (id:any) =>{
       console.log("delete called");
@@ -49,7 +55,7 @@ const navigateToNew = () =>{
 
 };
        return <div className='homeBody'>
-                    <h3>Smart Todo</h3>
+                   <div className='cardHeader'><span onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span> <h3>Smart Todo</h3><span onClick={refreshCards}><FontAwesomeIcon icon={faRefresh } /></span></div>
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
@@ -59,7 +65,7 @@ const navigateToNew = () =>{
                         }
 
                     </div>
-                    <div className='floatAdd'><span onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span></div>
+                    
               
               </div>;
               

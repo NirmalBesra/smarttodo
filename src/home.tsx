@@ -13,7 +13,7 @@ type Card = {
   taskname:string,
   priority: string,
   desc: string,
-  isCompleted: number
+  isCompleted: boolean
 };
 const [cards , setCards] = useState<Card[]>([]);
 
@@ -28,7 +28,7 @@ const refreshCards = ()=>{
       .then((res)=>res.json())//.then((data)=>{setCards(data)});
       .then((data)=> setCards(data.map((card: Card)=>({
             ...card,
-            isCompleted : card.isCompleted ?? 0
+            isCompleted: card.isCompleted ?? false
       })))),
 
       console.log("cards were refreshed");
@@ -54,7 +54,8 @@ const deleteCard = async (id:any) =>{
             console.log(error);
       }
 };
-const handleToggle = (id:number) => {
+const  handleToggle = async (id:number) => {
+      let updatedStatus = 0;
       console.log(cards);
       setCards(prev => 
             prev.map( card => 
@@ -62,6 +63,31 @@ const handleToggle = (id:number) => {
                         ? {...card, isCompleted: !card.isCompleted}
                         :card
       ));
+      
+      try {
+            updatedStatus = 
+            const res = await fetch('http://localhost:8181/updateStatus',{
+        method: "PUT",
+        headers: {
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify( {
+            id: id,
+            isCompleted: updatedStatus
+
+        }),
+      });
+      if(res.ok){
+        const result = await res.json();
+        console.log('Success', result);
+
+      }else{
+        console.log("submition failed");
+      }
+      }
+      catch(err){
+            console.log(err);
+      }
 }
 
 const navigateToNew = () =>{

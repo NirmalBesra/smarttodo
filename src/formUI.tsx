@@ -68,7 +68,7 @@ const navigate = useNavigate();
   const handleKeyPress = (e:KeyboardEvent) =>{
     if(e.key==='Enter') 
       {
-      console.log("enter was pressed");
+      //console.log("enter was pressed");
       handleSubmit();
     }
   }

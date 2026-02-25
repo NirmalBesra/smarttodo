@@ -13,7 +13,7 @@ type Card = {
   taskname:string,
   priority: string,
   desc: string,
-  isCompleted: boolean
+  isCompleted: number
 };
 const [cards , setCards] = useState<Card[]>([]);
 
@@ -28,7 +28,7 @@ const refreshCards = ()=>{
       .then((res)=>res.json())//.then((data)=>{setCards(data)});
       .then((data)=> setCards(data.map((card: Card)=>({
             ...card,
-            isCompleted: card.isCompleted ?? false
+            isCompleted : card.isCompleted ?? 0
       })))),
 
       console.log("cards were refreshed");
@@ -55,6 +55,7 @@ const deleteCard = async (id:any) =>{
       }
 };
 const handleToggle = (id:number) => {
+      console.log(cards);
       setCards(prev => 
             prev.map( card => 
                   card.id === id

@@ -15,8 +15,8 @@ type Card = {
   desc: string,
   isCompleted: boolean
 };
-const [cards,setCards] = useState<Card[]>([]);
-const [isOpen, setIsOpen] = useState(false);
+const [cards , setCards] = useState<Card[]>([]);
+
 
 const navigate = useNavigate();
 useEffect(()=>{
@@ -25,11 +25,11 @@ useEffect(()=>{
 
 const refreshCards = ()=>{
       fetch("http://localhost:8181/getlist")
-      .then((res)=>res.json())
-      .then((data)=> setCards(data.map((cards: Card)=>{
-            ...cards,
-            isOpen: cards.isCompleted ?? false
-      }))),
+      .then((res)=>res.json())//.then((data)=>{setCards(data)});
+      .then((data)=> setCards(data.map((card: Card)=>({
+            ...card,
+            isCompleted: card.isCompleted ?? false
+      })))),
 
       console.log("cards were refreshed");
 }
@@ -54,8 +54,13 @@ const deleteCard = async (id:any) =>{
             console.log(error);
       }
 };
-const handleToggle = () => {
-      setIsOpen(prev =>!prev);
+const handleToggle = (id:number) => {
+      setCards(prev => 
+            prev.map( card => 
+                  card.id === id
+                        ? {...card, isCompleted: !card.isCompleted}
+                        :card
+      ));
 }
 
 const navigateToNew = () =>{
@@ -67,7 +72,7 @@ const navigateToNew = () =>{
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
-                                    <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span> <div className={`toggle ${isOpen ? "active" : ""}`} onClick={handleToggle}> <div className="circle"></div></div></div>
+                                    <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span> <div className={`toggle ${card.isCompleted ? "active" : ""}`} onClick={()=> handleToggle(card.id)}> <div className="circle"></div></div></div>
                                     <div className='priority'><span>{card.priority}</span> <span onClick={()=>deleteCard(card.id)}><FontAwesomeIcon icon={faTrash } /></span></div>
                               </div>))
                         }
@@ -79,3 +84,5 @@ const navigateToNew = () =>{
               
 }
 export default Home;
+
+

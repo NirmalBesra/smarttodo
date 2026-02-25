@@ -8,6 +8,7 @@ function FormUI() {
 //form states
  const [taskName, setTaskName] = useState("");
  const [priority, setPriority] = useState("");
+  const [desc, setDesc] = useState("");
  const [error, setError] = useState("");
 
 
@@ -21,6 +22,9 @@ function FormUI() {
   else if(priority.trim()===''){
     setError("Priority is required for submittion");
 
+  }else if(desc.trim()===''){
+    setError("description is required for submittion");
+
   } else {
     Submit();
   }
@@ -31,7 +35,7 @@ function FormUI() {
 const navigate = useNavigate();
  const Submit = async ()=>{
  // const [error, setError] = useState<string | null>(null);
-  const data = {taskname:taskName,priority:priority};
+  const data = {taskname:taskName,priority:priority,desc:desc};
     try {
       const res = await fetch('http://localhost:8181/posttodo',{
         method: "POST",
@@ -84,6 +88,10 @@ const navigate = useNavigate();
             <option value="Personal">Personal</option>
             <option value="Urgent">Urgent</option>
           </select>
+
+            <label className="lbl" htmlFor="desc">Description</label>
+          <textarea name='description' placeholder='description' onChange={(e)=> setDesc(e.target.value)}/>
+
           <div className="buttonDiv">
             <button className="button" onClick={handleSubmit}> 
               <div className="button-outer">

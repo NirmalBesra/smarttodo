@@ -13,7 +13,7 @@ type Card = {
   taskname:string,
   priority: string,
   desc: string,
-  isCompleted: boolean
+  isCompleted: number
 };
 const [cards , setCards] = useState<Card[]>([]);
 
@@ -26,12 +26,9 @@ useEffect(()=>{
 const refreshCards = ()=>{
       fetch("http://localhost:8181/getlist")
       .then((res)=>res.json())//.then((data)=>{setCards(data)});
-      .then((data)=> setCards(data.map((card: Card)=>({
-            ...card,
-            isCompleted: card.isCompleted ?? false
-      })))),
+      .then((data)=> {setCards(data);console.log("cards were refreshed");})//setCards(data.map((card: Card)=>({...card, isCompleted: card.isCompleted ?? 0 /*second ? allows for isCompleted field to be optional*/})))),
 
-      console.log("cards were refreshed");
+      
 }
 
 const deleteCard = async (id:any) =>{
@@ -60,13 +57,22 @@ const  handleToggle = async (id:number) => {
       setCards(prev => 
             prev.map( card => 
                   card.id === id
-                        ? {...card, isCompleted: !card.isCompleted}
+                        ? {...card, isCompleted: card.isCompleted===0 ? 1:0 }
                         :card
       ));
       
       try {
-            updatedStatus = 
-            const res = await fetch('http://localhost:8181/updateStatus',{
+            
+            setCards(prev =>
+            prev.map(card => {
+                  if (card.id === id) {
+                  updatedStatus = 1 - card.isCompleted;
+                  return { ...card, isCompleted: updatedStatus };
+                  }
+                  return card;
+            })
+            );
+        const res = await fetch('http://localhost:8181/updateStatus',{
         method: "PUT",
         headers: {
           "Content-Type":"application/json"
@@ -76,9 +82,12 @@ const  handleToggle = async (id:number) => {
             isCompleted: updatedStatus
 
         }),
+
+
       });
       if(res.ok){
         const result = await res.json();
+        refreshCards();
         console.log('Success', result);
 
       }else{

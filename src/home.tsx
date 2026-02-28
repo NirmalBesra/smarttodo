@@ -52,26 +52,23 @@ const deleteCard = async (id:any) =>{
       }
 };
 const  handleToggle = async (id:number) => {
-      let updatedStatus = 0;
-      console.log(cards);
+      const currentCard = cards.find(card => card.id ===id);
+
+      if (!currentCard) return;
+
+      const updatedStatus  = currentCard.isCompleted === 0 ? 1: 0;
+
       setCards(prev => 
             prev.map( card => 
                   card.id === id
-                        ? {...card, isCompleted: card.isCompleted===0 ? 1:0 }
+                        ? {...card, isCompleted: updatedStatus }
                         :card
       ));
       
       try {
             
-            setCards(prev =>
-            prev.map(card => {
-                  if (card.id === id) {
-                  updatedStatus = 1 - card.isCompleted;
-                  return { ...card, isCompleted: updatedStatus };
-                  }
-                  return card;
-            })
-            );
+           
+            console.log(updatedStatus);
         const res = await fetch('http://localhost:8181/updateStatus',{
         method: "PUT",
         headers: {

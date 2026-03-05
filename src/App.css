@@ -219,3 +219,52 @@ button:hover
 .toggle.active .circle {
   transform: translateX(8px);
 }
+
+@keyframes trashBin {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(40deg); }
+  50% { transform: rotate(0deg);  } 
+  75% {    transform: rotate(-40deg);}
+  100% {    transform: rotate(0deg); }
+}
+
+@keyframes spinIcon {
+  0% { transform: rotate(0deg); }
+
+  100% {    transform: rotate(360deg); }
+}
+.trashSpan:hover {
+  animation-name: trashBin;
+  animation-duration:2s;
+  animation-iteration-count: infinite;
+}
+
+.refreshIcon:hover {
+   animation-name: spinIcon;
+  animation-duration:3s;
+  animation-iteration-count: infinite;
+}
+@keyframes breathingBackground {
+  0% {  background-color:#e1e1e1; }
+
+  100% {    background-color:#c5dca4; }
+}
+.toggle:hover{
+   animation-name: breathingBackground;
+  animation-duration:1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+
+@keyframes breathingBackground {
+  0% {  background-color:#4caf50; }
+
+  100% {    background-color:#c5dca4; }
+}
+.toggle.active:hover{
+   animation-name: breathingBackground;
+  animation-duration:1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

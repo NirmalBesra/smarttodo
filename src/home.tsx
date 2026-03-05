@@ -61,7 +61,7 @@ const  handleToggle = async (id:number) => {
       setCards(prev => 
             prev.map( card => 
                   card.id === id
-                        ? {...card, isCompleted: updatedStatus }
+                        ? {...card, isCompleted: updatedStatus }//[{,Iscompleted = updatedStatus  },{},{}]
                         :card
       ));
       
@@ -101,18 +101,18 @@ const navigateToNew = () =>{
 
 };
        return <div className='homeBody'>
-                   <div className='cardHeader'><span onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span> <h3>Smart Todo</h3><span onClick={refreshCards}><FontAwesomeIcon icon={faRefresh } /></span></div>
+                   <div className='cardHeader'><span  onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span> <h3>Smart Todo</h3><span className= 'refreshIcon' onClick={refreshCards}><FontAwesomeIcon icon={faRefresh } /></span></div>
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">
                                     <div className='taskName'><span className='taskNameSpan'>{card.taskname}</span> <div className={`toggle ${card.isCompleted ? "active" : ""}`} onClick={()=> handleToggle(card.id)}> <div className="circle"></div></div></div>
-                                    <div className='priority'><span>{card.priority}</span> <span onClick={()=>deleteCard(card.id)}><FontAwesomeIcon icon={faTrash } /></span></div>
+                                    <div className='priority'><span>{card.priority}</span> <span className="trashSpan" onClick={()=>deleteCard(card.id)}><FontAwesomeIcon icon={faTrash } /></span></div>
                               </div>))
                         }
 
                     </div>
                     
-              
+              <div className="loading"></div>
               </div>;
               
 }

@@ -10,7 +10,7 @@ function FormUI() {
  const [priority, setPriority] = useState("");
   const [desc, setDesc] = useState("");
  const [error, setError] = useState("");
-
+ const [showPopup, setShowPopup] = useState(false);
 
  const handleSubmit  = (e?:React.MouseEvent<HTMLButtonElement>)=> {
   e?.preventDefault();
@@ -43,10 +43,13 @@ const navigate = useNavigate();
           "Content-Type":"application/json"
         },
         body:JSON.stringify(data),
+         
       });
       if(res.ok){
         const result = await res.json();
         console.log('Success', result);
+        setShowPopup(true);
+        setTimeout(()=>{navigate("/")},2000);
 
       }else{
         console.log("submition failed");
@@ -110,6 +113,11 @@ const navigate = useNavigate();
             
           </div>
           {error && <p className="errorClass">{error}</p>}
+          {showPopup && (<div className="overlay">
+            <div className='popup'>
+                  <h4>Your task has been created</h4>
+            </div>
+            </div>)}
     </form>
   )
 }

@@ -282,3 +282,48 @@ button:hover
   75% {    transform: rotate(-20deg);}
   100% {    transform: rotate(0deg); }
 }
+
+@keyframes breathingInput {
+  0%{
+      border-radius:5px;
+  border: 1px, solid, #818181;
+
+  }
+  50% {
+  border-radius:5px;
+  border: 1px, solid, #28b928;
+  } 
+  100%{
+      border-radius:5px;
+  border: 1px, solid, #818181;
+
+  }
+  
+}
+
+.taskNameInput:hover
+{
+  animation-name: breathingInput;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+.typeDropDown:hover
+{
+  animation-name: breathingInput;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+.descText{
+  border-radius:5px;
+  border: 1px, solid, #818181;
+}
+
+.descText:hover
+{
+  animation-name: breathingInput;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}

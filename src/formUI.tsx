@@ -83,10 +83,10 @@ const navigate = useNavigate();
   return (
     <form className="formBody">
           <label className="lbl" htmlFor="taskName">Task Name</label>
-          <input type='text' name='taskName' placeholder='Task Name' onChange={(e)=> setTaskName(e.target.value)}/>
+          <input type='text' className="taskNameInput" name='taskName' placeholder='Task Name' onChange={(e)=> setTaskName(e.target.value)}/>
           
           <label className="lbl" htmlFor="dropDown">Type</label>
-          <select className="typeDropDown" name="dropDown" onChange={(e)=>{setPriority(e.target.value)}}>
+          <select className="typeDropDown"  name="dropDown" onChange={(e)=>{setPriority(e.target.value)}}>
             <option >Select the priority</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
@@ -94,7 +94,7 @@ const navigate = useNavigate();
           </select>
 
             <label className="lbl" htmlFor="desc">Description</label>
-          <textarea name='description' placeholder='description' onChange={(e)=> setDesc(e.target.value)}/>
+          <textarea name='description'className="descText" placeholder='description' onChange={(e)=> setDesc(e.target.value)}/>
 
           <div className="buttonDiv">
             <button className="button" onClick={handleSubmit}> 

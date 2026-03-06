@@ -101,7 +101,7 @@ const navigateToNew = () =>{
 
 };
        return <div className='homeBody'>
-                   <div className='cardHeader'><span  onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span> <h3>Smart Todo</h3><span className= 'refreshIcon' onClick={refreshCards}><FontAwesomeIcon icon={faRefresh } /></span></div>
+                   <div className='cardHeader'><span className="addIcon"  onClick={navigateToNew}><FontAwesomeIcon icon={faAdd } /></span> <h3>Smart Todo</h3><span className= 'refreshIcon' onClick={refreshCards}><FontAwesomeIcon icon={faRefresh } /></span></div>
                     <div className='cardBody'>
                         {
                               cards.map((card)=>(<div key={card.id} className="card">

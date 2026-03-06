@@ -87,6 +87,7 @@ const navigate = useNavigate();
           
           <label className="lbl" htmlFor="dropDown">Type</label>
           <select className="typeDropDown" name="dropDown" onChange={(e)=>{setPriority(e.target.value)}}>
+            <option >Select the priority</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
             <option value="Urgent">Urgent</option>

@@ -49,7 +49,9 @@ const navigate = useNavigate();
         const result = await res.json();
         console.log('Success', result);
         setShowPopup(true);
-        setTimeout(()=>{navigate("/")},2000);
+        setTimeout(()=>{
+          navigate("/")
+        },2000);
 
       }else{
         console.log("submition failed");
@@ -81,6 +83,7 @@ const navigate = useNavigate();
   }
  },[])
   return (
+  <div>
     <form className="formBody">
           <label className="lbl" htmlFor="taskName">Task Name</label>
           <input type='text' className="taskNameInput" name='taskName' placeholder='Task Name' onChange={(e)=> setTaskName(e.target.value)}/>
@@ -114,12 +117,14 @@ const navigate = useNavigate();
             
           </div>
           {error && <p className="errorClass">{error}</p>}
-          {showPopup && (<div className="overlay">
+          
+    </form>
+    {showPopup && (<div className="overlay">
             <div className='popup'>
                   <h4>Your task has been created</h4>
             </div>
             </div>)}
-    </form>
+    </div>
   )
 }
 

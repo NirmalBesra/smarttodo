@@ -16,11 +16,12 @@ type Card = {
   isCompleted: number
 };
 const [cards , setCards] = useState<Card[]>([]);
-
+const [showPopup, setShowPopup] = useState(false);
 
 const navigate = useNavigate();
 useEffect(()=>{
       refreshCards();
+     
 },[]);
 
 const refreshCards = ()=>{
@@ -97,7 +98,10 @@ const  handleToggle = async (id:number) => {
 }
 
 const navigateToNew = () =>{
- navigate("/Add")
+ setShowPopup(true);
+        setTimeout(()=>{
+          navigate("/Add")
+        },500); 
 
 };
        return <div className='homeBody'>
@@ -112,7 +116,11 @@ const navigateToNew = () =>{
 
                     </div>
                     
-              <div className="loading"></div>
+              {showPopup && (<div className="overlay">
+            <div className='popup'>
+                  <h4>Loading..</h4>
+            </div>
+            </div>)}
               </div>;
               
 }
